@@ -387,5 +387,3 @@ class VueQuiz
        	document.getElementById("imgDroite").src = IMG_VICTOIRE;
     }
 }
-
-var conferencier = new Presentateur();
