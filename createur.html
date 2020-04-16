@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Création documents Quiz</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <script
+    type="text/javascript"
+    src="/js/lib/dummy.js"
+    
+  ></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+
+
+  <style id="compiled-css" type="text/css">
+      td
+{
+  padding: 10px;
+}
+table
+{
+  margin: auto;
+}
+  </style>
+
+</head>
+<body>
+    <html>
+<body>
+<table>
+<tr><td>
+  Titre <br>
+  <input type="text" id="titre" name="titre"><br>
+  ImgGauche <br>
+  <input type="text" id="imgGauche" name="imgGauche"><br>
+  ImgCentre <br>
+  <input type="text" id="imgCentre" name="imgCentre"><br>
+  ImgDroite <br>
+  <input type="text" id="imgDroite" name="imgDroite"><br>
+  DescGauche <br>
+  <input type="text" id="descGauche" name="descGauche"><br>
+  DescCentre <br>
+  <input type="text" id="descCentre" name="descCentre"><br>
+  DescDroite <br>
+  <input type="text" id="descDroite" name="descDroite"><br>
+  Réponse <br>
+  <input type="text" id="reponse" name="reponse"><br>
+</td>
+<td style="padding: 50px;"><input type="button" id="boutonQuestion" value="Ajouter la question" name="boutonQuestion"></td>
+<td><b>Quiz</b><br> 
+  ID <br>
+  <input type="text" id="id" name="id"><br>
+  Titre <br>
+  <input type="text" id="titreQuiz" name="titreQuiz"><br>
+  Description <br>
+  <input type="text" id="descQuiz" name="descQuiz"><br>
+  Image <br>
+  <input type="text" id="imgQuiz" name="imgQuiz"><br>
+  <br> Questions <br>
+    <ul id="liste">
+    </ul>
+</td>
+</tr>
+<tr><td>Ligne à copier dans le fichier des quiz: <br>
+<span id="ligneQuiz"></span></td><td><input type="button" id="envoyer" name="envoyer" value="Créer le quiz"></td></tr>
+</table>
+</body>
+</html>
+
+  <!-- TODO: Missing CoffeeScript 2 -->
+
+  <script type="text/javascript">//<![CDATA[
+
+
+var listeQuestions = [];
+var quiz = [];
+
+function updateAffichage()
+{
+	liste = document.getElementById("liste");
+  liste.innerHTML = "";
+  
+  for (var i = 0; i < listeQuestions.length; i++)
+  {
+    var li = document.createElement('li');
+    liste.appendChild(li);
+    li.innerHTML=li.innerHTML + listeQuestions[i][0];
+	}
+  document.getElementById("titre").value = "";
+  document.getElementById("imgGauche").value = "";
+  document.getElementById("imgCentre").value = "";
+  document.getElementById("imgDroite").value = "";
+  document.getElementById("descGauche").value = "";
+  document.getElementById("descCentre").value = "";
+  document.getElementById("descDroite").value = "";
+  document.getElementById("reponse").value = "";  
+}
+
+document.getElementById("boutonQuestion").onclick = function () 
+	{
+		var titre = document.getElementById("titre").value;
+    var imgGauche = document.getElementById("imgGauche").value;
+    var imgCentre = document.getElementById("imgCentre").value;
+    var imgDroite = document.getElementById("imgDroite").value;
+    var descGauche = document.getElementById("descGauche").value;
+    var descCentre = document.getElementById("descCentre").value;
+    var descDroite = document.getElementById("descDroite").value;
+    var reponse = document.getElementById("reponse").value;
+    
+    if(titre == "" || imgGauche == "" || imgCentre == "" || imgDroite == "" || descGauche == "" || descCentre == "" || descDroite == "" || reponse == "")
+    {
+    	alert("Il faut remplir tous les champs pour créer une question.");
+    }
+    else
+    {
+    	listeQuestions.push([titre, imgGauche, imgCentre, imgDroite, descGauche, descCentre, descDroite, reponse]);
+	    updateAffichage();
+    }
+};
+
+document.getElementById("envoyer").onclick = function ()
+{
+		var id = document.getElementById("id").value;
+    var titreQuiz = document.getElementById("titreQuiz").value;
+    var descQuiz = document.getElementById("descQuiz").value;
+    var imgQuiz = document.getElementById("imgQuiz").value;
+    
+    if(id == "" || titreQuiz == "" || descQuiz == "" || imgQuiz == "")
+    {
+    	alert("Il faut remplir tous les champs du Quiz");
+    }
+    else
+    {
+    	quiz = [id, titreQuiz, descQuiz, imgQuiz];
+      
+      document.getElementById("ligneQuiz").innerHTML = id + ", " + titreQuiz + ", " + descQuiz + ", " + imgQuiz;
+    
+   		var strQuestions = "";
+    	for(var question of listeQuestions)
+    	{
+       	strQuestions = question[0] + "," + question[1] + "," + question[2] + "," + question[3] + "," + question[4] + "," + question[5] + "," + question[6] + "," + question[7] + ",";
+    	
+    	}
+      download(id + ".txt", strQuestions);
+    }        
+    
+  
+};
+
+function download(filename, text) {
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
+}
+
+
+  //]]></script>
+
+  <script>
+    // tell the embed parent frame the height of the content
+    if (window.parent && window.parent.parent){
+      window.parent.parent.postMessage(["resultsFrame", {
+        height: document.body.getBoundingClientRect().height,
+        slug: "bwj2rtmq"
+      }], "*")
+    }
+
+    // always overwrite window.name, in case users try to set it manually
+    window.name = "result"
+  </script>
+</body>
+</html>
