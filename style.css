@@ -1,0 +1,20 @@
+.reponse{
+    	padding: 30px;
+	}
+  
+  .quiz
+  {
+    height: 150px;
+    width: 200px;
+    padding: 15px;
+    visibility: hidden;
+  }
+  
+  #selectionQuiz
+  {
+    position: fixed;
+    right: 100px;
+    left: 100px;
+    bottom: -10px;
+    pointer-events: none;
+  }
