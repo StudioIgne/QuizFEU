@@ -9,6 +9,7 @@ class Jeu
 {
 	constructor(listeQuiz, scoreDebut = 0, listeQuizFaits = [])
     {
+	    alert("marde");
     	this.listeQuiz = listeQuiz;
     	this.score = scoreDebut;
         this.listeQuizFaits = listeQuizFaits;
