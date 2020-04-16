@@ -296,6 +296,7 @@ class Presentateur
   //Retourne array[Quiz]
 	getListeQuiz(file)
 	{
+		document.getElementById("score").innerHTML = file;
   	var allText = "erreur";
     var rawFile = new XMLHttpRequest();
     rawFile.open("GET", file, false);
