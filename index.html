@@ -82,10 +82,7 @@
 
   <script type="text/javascript">//<![CDATA[
 
-
-const SRC_QUESTIONS = "https://5mdbeq0iwdfqabpt1voyfg-on.drv.tw/Quiz%20feu/quizMarde.txt";
-const DIRECTOIRE = "https://5mdbeq0iwdfqabpt1voyfg-on.drv.tw/Quiz%20feu/";
-const LISTE_QUIZ_DOC = "listeQuiz5.txt";
+const LISTE_QUIZ_DOC = "listeQuiz.txt";
 const NBR_ELEMS_QUESTION = 9;
 const NBR_ELEMS_QUIZ = 4;
     
@@ -262,7 +259,6 @@ class Presentateur
 	//Retourne array[Question]
 	getQuestions(file)
 	{
-  	var file = "https://5mdbeq0iwdfqabpt1voyfg-on.drv.tw/Quiz%20feu/aspartame2.txt";
   	var allText = "erreur";
     var rawFile = new XMLHttpRequest();
     rawFile.open("GET", file, true);
@@ -298,7 +294,7 @@ class Presentateur
 	}
   
   //Retourne array[Quiz]
-	getListeQuiz(file = "https://5mdbeq0iwdfqabpt1voyfg-on.drv.tw/Quiz%20feu/listeQuiz4.txt")
+	getListeQuiz(file)
 	{
   	var allText = "erreur";
     var rawFile = new XMLHttpRequest();
@@ -329,7 +325,7 @@ class Presentateur
     var listeQuiz = [];
     for (var e of tableauQuiz)
     {
-    		var questionsTemp = this.getQuestions(DIRECTOIRE + e[0] + ".txt");
+    		var questionsTemp = this.getQuestions(e[0] + ".txt");
         listeQuiz.push(new Quiz(e[0], e[1], questionsTemp, e[2], e[3]));
         alert(questionsTemp.length);
     }
@@ -434,13 +430,9 @@ class VueQuiz
     
     		document.getElementById("titre").textContent = titre;
         
-        
-        document.getElementById("imgDroite").src = imgDroite;
-        document.getElementById("imgGauche").src = imgGauche;
-       	document.getElementById("imgCentre").src = imgCentre;
-    		//document.getElementById("imgGauche").src = DIRECTOIRE + this.directoire + imgGauche + ".jpg";
-       	//document.getElementById("imgCentre").src = DIRECTOIRE + this.directoire + imgCentre + ".jpg";
-       	//document.getElementById("imgDroite").src = DIRECTOIRE + this.directoire + imgDroite + ".jpg";
+        document.getElementById("imgGauche").src = this.directoire + imgGauche + ".jpg";
+       	document.getElementById("imgCentre").src = this.directoire + imgCentre + ".jpg";
+       	document.getElementById("imgDroite").src = this.directoire + imgDroite + ".jpg";
         
         document.getElementById("descGauche").style.visibility = "hidden";
         document.getElementById("descCentre").style.visibility = "hidden";
